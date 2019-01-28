@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  civicrm-drupal:
+    build: .
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+    depends_on:
+      - db
+
+  db:
+    image: mysql
+    networks:
+      - backend
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: notsecure
+      MYSQL_DATABASE: civicrm-drupal
+      MYSQL_USER: civicrm-drupal
+      MYSQL_PASSWORD: notsecure
+
+networks:
+  backend:
