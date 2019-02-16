@@ -1,0 +1,15 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "173940671194.dkr.ecr.us-east-2.amazonaws.com/civicrm-drupal-docker:latest",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80"
+    }
+  ],
+  "Volumes": [],
+  "Entrypoint": "docker-php-entrypoint",
+  "Command": "apache2-foreground"
+}
