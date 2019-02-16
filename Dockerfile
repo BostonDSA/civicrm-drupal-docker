@@ -1,3 +1,4 @@
 FROM drupal:7-apache
-ADD install-civicrm.bash /tmp/install-civicrm.bash
-RUN /bin/bash -c /tmp/install-civicrm.bash
+ENV CIVICRM_VERSION 5.9.1
+ADD Makefile Makefile
+RUN make
