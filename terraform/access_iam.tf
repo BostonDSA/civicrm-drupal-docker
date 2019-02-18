@@ -1,4 +1,21 @@
-data "aws_iam_policy_document" "codebuild" {
+data "aws_iam_policy_document" "codebuild-assume-role-policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["codebuild.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "codebuild" {
+  name               = "role-codebuild-${var.project_name}"
+  path               = "/${var.project_name}/"
+  assume_role_policy = "${data.aws_iam_policy_document.codebuild-assume-role-policy.json}"
+}
+
+data "aws_iam_policy_document" "codebuild_policy" {
   statement {
     sid = 1
     actions = [
@@ -24,7 +41,7 @@ data "aws_iam_policy_document" "codebuild" {
 	"ecr:UploadLayerPart"
     ]
     resources = [
-      "arn:aws:ecr:${var.aws_region}:&{aws:userid}:repository/${var.project_name}"
+      "arn:aws:ecr:${var.aws_region}:${var.aws_account_id}:repository/${var.project_name}"
     ]
   }
 
@@ -36,14 +53,14 @@ data "aws_iam_policy_document" "codebuild" {
 	"logs:PutLogEvents"
     ]
     resources = [
-	"arn:aws:logs:${var.aws_region}:&{aws:userid}:log-group:/aws/codebuild/${var.project_name}-build",
-	"arn:aws:logs:${var.aws_region}:&{aws:userid}:log-group:/aws/codebuild/${var.project_name}-build:*",
+      "arn:aws:logs:${var.aws_region}:${var.aws_account_id}:log-group:/aws/codebuild/${var.project_name}-build",
+      "arn:aws:logs:${var.aws_region}:${var.aws_account_id}:log-group:/aws/codebuild/${var.project_name}-build:*"
     ]
   }
 }
 
-resource "aws_iam_policy" "codebuild" {
-  name   = "${var.project_name}-codebuild"
-  path   = "/${var.project_name}/"
-  policy = "${data.aws_iam_policy_document.codebuild.json}"
+resource "aws_iam_role_policy" "codebuild" {
+  name = "policy-codebuild-${var.project_name}"
+  role = "${aws_iam_role.codebuild.id}"
+  policy = "${data.aws_iam_policy_document.codebuild_policy.json}"
 }
