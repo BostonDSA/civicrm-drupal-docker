@@ -6,6 +6,10 @@ variable project_name {
   default = "civicrm-drupal-docker"
 }
 
+variable github_owner {
+  default = "bostondsa"
+}
+
 variable aws_region {
   default = "us-east-1"
 }
