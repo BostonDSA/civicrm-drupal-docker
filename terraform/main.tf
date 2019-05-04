@@ -11,10 +11,8 @@ resource "aws_ecs_cluster" "civicrm" {
 resource "aws_ecs_service" "civicrm" {
   name            = "${var.project_name}"
   cluster         = "${aws_ecs_cluster.civicrm.id}"
-  # TODO
   task_definition = "${aws_ecs_task_definition.civicrm.arn}"
   desired_count   = 1
-  #iam_role        = "${aws_iam_role.ecs.arn}"
   depends_on      = ["aws_iam_role_policy.ecs"]
 
   placement_constraints {
