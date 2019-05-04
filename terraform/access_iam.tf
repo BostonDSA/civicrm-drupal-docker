@@ -1,7 +1,7 @@
 # CodePipeline
 
 data "aws_iam_policy_document" "codepipeline-assume-role-policy" {
-  statement {
+  Statement {
     actions = ["sts:AssumeRole"]
 
     principals {
@@ -130,7 +130,7 @@ data "aws_iam_policy_document" "codebuild_policy" {
 	"s3:GetObjectVersion"
       ]
     resources = [
-	"arn:aws:s3:::codepipeline-${var.aws_region}-*"
+	"*"
     ]
   }
 
@@ -145,7 +145,7 @@ data "aws_iam_policy_document" "codebuild_policy" {
 	"ecr:UploadLayerPart"
     ]
     resources = [
-      "arn:aws:ecr:${var.aws_region}:${var.aws_account_id}:repository/${var.project_name}"
+      "*"
     ]
   }
 
@@ -157,8 +157,7 @@ data "aws_iam_policy_document" "codebuild_policy" {
 	"logs:PutLogEvents"
     ]
     resources = [
-      "arn:aws:logs:${var.aws_region}:${var.aws_account_id}:log-group:/aws/codebuild/${var.project_name}-build",
-      "arn:aws:logs:${var.aws_region}:${var.aws_account_id}:log-group:/aws/codebuild/${var.project_name}-build:*"
+      "*"
     ]
   }
 }
@@ -167,4 +166,77 @@ resource "aws_iam_role_policy" "codebuild" {
   name = "policy-codebuild-${var.project_name}"
   role = "${aws_iam_role.codebuild.id}"
   policy = "${data.aws_iam_policy_document.codebuild_policy.json}"
+}
+
+# ECS
+
+data "aws_iam_policy_document" "ecs-assume-role-policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ecs.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ecs" {
+  name               = "role-ecs-${var.project_name}"
+  path               = "/${var.project_name}/"
+  assume_role_policy = "${data.aws_iam_policy_document.codepipeline-assume-role-policy.json}"
+}
+
+data "aws_iam_policy_document" "ecs_policy" {
+  statement {
+    actions = [
+      "*"
+    ],
+    resources = [
+      "*"
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "ecs" {
+  name = "policy-ecs-${var.project_name}"
+  role = "${aws_iam_role.ecs.id}"
+  policy = "${data.aws_iam_policy_document.ecs_policy.json}"
+}
+
+resource "aws_iam_instance_profile" "ec2" {
+  name = "instance-profile-${var.project_name}"
+  role = "${aws_iam_role.role.name}"
+}
+
+data "aws_iam_policy_document" "ec2-assume-role-policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "ec2" {
+  name = "test_role"
+  path = "/"
+
+    assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+               "Service": "ec2.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+        }
+    ]
+}
+EOF
 }

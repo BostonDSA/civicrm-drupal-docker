@@ -1,0 +1,8 @@
+[
+    {
+	"name": "${project_name}",
+	"image": "${aws_account_id}.dkr.ecr.${aws_region}.amazonaws.com/${project_name}:latest",
+	"memory": 512,
+	"cpu": 0
+    }
+]
