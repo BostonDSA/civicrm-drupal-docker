@@ -7,9 +7,9 @@ This repository has a few components:
 
 # Docker
 
-The Dockerfile starts from the official Drupal 7* + Apache Docker image. It adds the CiviCRM module and any PHP dependencies that are not in the base image. A docker-compose is provided for local development.
+The Dockerfile starts from the official Drupal 7† + Apache Docker image. It adds the CiviCRM module and any PHP dependencies that are not in the base image. A docker-compose is provided for local development.
 
-* CiviCRM support for Drupal 8 is in beta.
+†CiviCRM support for Drupal 8 is in beta.
 
 # Terraform
 
