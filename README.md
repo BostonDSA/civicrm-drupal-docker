@@ -7,7 +7,9 @@ This repository has a few components:
 
 # Docker
 
-The Dockerfile starts from the official Drupal 7[^1] + Apache Docker image. It adds the CiviCRM module and any PHP dependencies that are not in the base image. A docker-compose is provided for local development.
+The Dockerfile starts from the official Drupal 7* + Apache Docker image. It adds the CiviCRM module and any PHP dependencies that are not in the base image. A docker-compose is provided for local development.
+
+* CiviCRM support for Drupal 8 is in beta.
 
 # Terraform
 
@@ -33,6 +35,3 @@ Once the container is built and deployed it will be running on the Elastic Conta
 **GitHub**
 : The GITHUB_TOKEN environment variable must be set. See https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
 
-
-
-[^1]: CiviCRM support for Drupal 8 is in beta.
