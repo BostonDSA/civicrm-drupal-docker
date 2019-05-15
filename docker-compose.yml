@@ -9,6 +9,15 @@ services:
       - backend
     depends_on:
       - db
+    environment:
+      MYSQL_DATABASE: civicrm-drupal
+      MYSQL_USER: civicrm-drupal
+      MYSQL_PASSWORD: notsecure
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      DRUPAL_HASH_SALT: salt
+    volumes:
+      - ./docker/civicrm-drupal/settings.php:/var/www/html/sites/default/settings.php
 
   db:
     image: mysql:5.7
