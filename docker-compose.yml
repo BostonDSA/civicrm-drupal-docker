@@ -18,6 +18,7 @@ services:
       DRUPAL_HASH_SALT: salt
     volumes:
       - ./docker/civicrm-drupal/settings.php:/var/www/html/sites/default/settings.php
+      - ./docker/civicrm-drupal/civicrm.settings.php:/var/www/html/sites/default/civicrm.settings.php
 
   db:
     image: mysql:5.7
