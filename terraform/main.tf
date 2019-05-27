@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "${var.aws_region}"
 }
 
 # ECS
@@ -56,6 +56,8 @@ resource "aws_instance" "web" {
   ami           = "${data.aws_ami.amazon-linux-ecs.id}"
   instance_type = "t3.micro"
   iam_instance_profile = "${aws_iam_instance_profile.ec2.name}"
+  subnet_id = "${aws_default_subnet.default.id}"
+  vpc_security_group_ids = ["${aws_security_group.civicrm.id}"]
 
   tags = {
     Name = "${var.project_name}"
