@@ -55,4 +55,15 @@ data "aws_ami" "amazon-linux-ecs" {
 resource "aws_instance" "web" {
   ami           = "${data.aws_ami.amazon-linux-ecs.id}"
   instance_type = "t3.micro"
+  iam_instance_profile = "${aws_iam_instance_profile.ec2.name}"
+
+  tags = {
+    Name = "${var.project_name}"
+  }
+
+  user_data = <<EOF
+#!/bin/bash
+echo ECS_CLUSTER=${aws_ecs_cluster.civicrm.name} >> /etc/ecs/ecs.config
+EOF
+
 }
