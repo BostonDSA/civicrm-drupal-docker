@@ -1,7 +1,7 @@
 # CodePipeline
 
 data "aws_iam_policy_document" "codepipeline-assume-role-policy" {
-  Statement {
+  statement {
     actions = ["sts:AssumeRole"]
 
     principals {
@@ -204,10 +204,7 @@ resource "aws_iam_role_policy" "ecs" {
   policy = "${data.aws_iam_policy_document.ecs_policy.json}"
 }
 
-resource "aws_iam_instance_profile" "ec2" {
-  name = "instance-profile-${var.project_name}"
-  role = "${aws_iam_role.role.name}"
-}
+# EC2
 
 data "aws_iam_policy_document" "ec2-assume-role-policy" {
   statement {
@@ -221,22 +218,17 @@ data "aws_iam_policy_document" "ec2-assume-role-policy" {
 }
 
 resource "aws_iam_role" "ec2" {
-  name = "test_role"
-  path = "/"
-
-    assume_role_policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": "sts:AssumeRole",
-            "Principal": {
-               "Service": "ec2.amazonaws.com"
-            },
-            "Effect": "Allow",
-            "Sid": ""
-        }
-    ]
+  name               = "role-ec2-${var.project_name}"
+  path               = "/${var.project_name}/"
+  assume_role_policy = "${data.aws_iam_policy_document.ec2-assume-role-policy.json}"
 }
-EOF
+
+resource "aws_iam_role_policy_attachment" "ecs-ec2" {
+  role       = "${aws_iam_role.ec2.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+}
+
+resource "aws_iam_instance_profile" "ec2" {
+  name = "instance-profile-${var.project_name}"
+  role = "${aws_iam_role.ec2.id}"
 }
