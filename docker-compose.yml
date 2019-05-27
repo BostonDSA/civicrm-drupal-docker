@@ -5,8 +5,6 @@ services:
     build: .
     ports:
       - "8080:80"
-    networks:
-      - backend
     depends_on:
       - db
     environment:
@@ -22,14 +20,9 @@ services:
 
   db:
     image: mysql:5.7
-    networks:
-      - backend
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: notsecure
       MYSQL_DATABASE: civicrm-drupal
       MYSQL_USER: civicrm-drupal
       MYSQL_PASSWORD: notsecure
-
-networks:
-  backend:
