@@ -27,6 +27,12 @@ data "template_file" "container_definitions" {
     aws_account_id = "${var.aws_account_id}"
     aws_region = "${var.aws_region}"
     project_name = "${var.project_name}"
+    org_name = "${var.org_name}"
+    # TODO move this out of env vars
+    mysql_password = "${var.aws_rds_root_password}"
+    mysql_host = "${aws_db_instance.shared.address}"
+    # TODO move this out of env vars
+    drupal_hash_salt = "${var.drupal_hash_salt}"
   }
 }
 

@@ -21,3 +21,5 @@ variable aws_availability_zone {
 variable aws_account_id {}
 
 variable aws_rds_root_password {}
+
+variable drupal_hash_salt {}

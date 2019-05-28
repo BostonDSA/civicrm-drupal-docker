@@ -17,11 +17,15 @@
 	    },
 	    {
 		"name": "MYSQL_USER",
-		"value": "${project_name}"
+		"value": "${org_name}"
 	    },
 	    {
 		"name": "MYSQL_PASSWORD",
-		"value": "todo"
+		"value": "${mysql_password}"
+	    },
+	    {
+		"name": "MYSQL_HOST",
+		"value": "${mysql_host}"
 	    },
 	    {
 		"name": "MYSQL_PORT",
@@ -29,7 +33,7 @@
 	    },
 	    {
 		"name": "DRUPAL_HASH_SALT",
-		"value": "todo"
+		"value": "${drupal_hash_salt}"
 	    }
 	]
     }
