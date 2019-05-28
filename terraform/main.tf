@@ -58,6 +58,8 @@ resource "aws_instance" "web" {
   iam_instance_profile = "${aws_iam_instance_profile.ec2.name}"
   subnet_id = "${aws_default_subnet.default.id}"
   vpc_security_group_ids = ["${aws_security_group.civicrm.id}"]
+  # This is a pregenerted key
+  key_name = "civicrm"
 
   tags = {
     Name = "${var.project_name}"
