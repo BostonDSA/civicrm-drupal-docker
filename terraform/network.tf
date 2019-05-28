@@ -41,3 +41,18 @@ resource "aws_security_group" "civicrm" {
   }
 
 }
+
+resource "aws_security_group" "database" {
+  name        = "${var.project_name}-database"
+  description = "Allow database traffic"
+  vpc_id      = "${aws_default_vpc.default.id}"
+
+  ingress {
+    description = "MySQL"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    security_groups = ["${aws_security_group.civicrm.id}"]
+  }
+
+}

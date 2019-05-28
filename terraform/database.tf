@@ -18,4 +18,5 @@ resource "aws_db_instance" "shared" {
   parameter_group_name = "default.mysql5.7"
   storage_encrypted = true
   # skip_final_snapshot = true
+  vpc_security_group_ids = ["${aws_security_group.database.id}"]
 }
