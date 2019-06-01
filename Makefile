@@ -25,7 +25,6 @@ build:
 # Creates the database tables for Drupal + CiviCRM
 seed-db:
 	drush site-install standard --db-url=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@${MYSQL_HOST}/${MYSQL_DATABASE}
-	drush pm-enable civicrm
 	cp /var/www/html/sites/default/civicrm.settings.php /var/www/html/sites/default/civicrm.settings.php.bak # backup
 	drush civicrm-install
 	cp /var/www/html/sites/default/civicrm.settings.php.bak /var/www/html/sites/default/civicrm.settings.php # restore
