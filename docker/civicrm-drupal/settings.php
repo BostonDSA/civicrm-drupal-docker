@@ -255,7 +255,7 @@ $databases = array (
       'host' => getenv('MYSQL_HOST'),
       'port' => getenv('MYSQL_PORT'),
       'driver' => 'mysql',
-      'prefix' => '',
+      'prefix' => 'drupal_',
     ),
   ),
 );
