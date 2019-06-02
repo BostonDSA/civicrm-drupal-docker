@@ -12,7 +12,6 @@ ENV DRUSH_VERSION 8.2.3
 # ENV DRUPAL_HASH_SALT
 
 ADD Makefile Makefile
-ADD docker/civicrm-drupal/settings.php /var/www/html/sites/default/settings.php
-ADD docker/civicrm-drupal/civicrm.settings.php /var/www/html/sites/default/civicrm.settings.php
+ADD docker/civicrm-drupal /var/www/html/sites/default
 
 RUN make
