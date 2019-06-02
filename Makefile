@@ -14,7 +14,7 @@ build:
 	/usr/local/bin/docker-php-ext-install mysqli
 
 # Configure temporary directory
-	mkdir /var/www/html/sites/default/files
+	mkdir -p /var/www/html/sites/default/files/civicrm
 	chown -R www-data:www-data /var/www/html/sites/default
 
 # Install drush
