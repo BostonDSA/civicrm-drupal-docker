@@ -28,3 +28,4 @@ seed-db:
 	cp /var/www/html/sites/default/civicrm.settings.php /var/www/html/sites/default/civicrm.settings.php.bak # backup
 	drush civicrm-install
 	cp /var/www/html/sites/default/civicrm.settings.php.bak /var/www/html/sites/default/civicrm.settings.php # restore
+	drush php-script sites/default/add_civi_perms_to_admin.php
