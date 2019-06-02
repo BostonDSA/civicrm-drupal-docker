@@ -16,6 +16,7 @@ build:
 # Configure temporary directory
 	mkdir -p /var/www/html/sites/default/files/civicrm
 	chown -R www-data:www-data /var/www/html/sites/default
+	chmod g+s /var/www/html/sites/default/files/civicrm
 
 # Install drush
 	curl -O -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar
