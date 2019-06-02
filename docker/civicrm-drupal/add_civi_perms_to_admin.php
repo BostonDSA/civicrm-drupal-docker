@@ -4,4 +4,4 @@
  */
 
 $admin = user_role_load_by_name('administrator');
-user_role_grant_permissions($admin->rid, array_keys(module_invoke("civicrm", "permission"));
+user_role_grant_permissions($admin->rid, array_keys(module_invoke("civicrm", "permission")));
