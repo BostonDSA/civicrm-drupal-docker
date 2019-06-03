@@ -3,7 +3,7 @@ resource "aws_ecr_repository" "build" {
 }
 
 resource "aws_s3_bucket" "build" {
-  bucket = "codepipeline-${var.project_name}"
+  bucket = "codepipeline-${var.org_name}-${var.project_name}"
   acl = "private"
 }
 
@@ -99,7 +99,7 @@ resource "aws_codebuild_project" "build" {
 
     environment_variable {
       "name" = "IMAGE_REPO_NAME"
-      "value" = "${var.project_name}"
+      "value" = "${var.org_name}"
     }
 
     environment_variable {
