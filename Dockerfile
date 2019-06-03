@@ -1,6 +1,6 @@
 FROM drupal:7-apache
 
-ENV CIVICRM_VERSION 5.9.1
+ENV CIVICRM_VERSION 5.13.5
 ENV DRUSH_VERSION 8.2.3
 
 # Other envars
