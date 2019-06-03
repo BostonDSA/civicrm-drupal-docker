@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "build" {
-  name = "${var.org_name}"
+  name = "${var.project_name}"
 }
 
 resource "aws_s3_bucket" "build" {
@@ -99,7 +99,7 @@ resource "aws_codebuild_project" "build" {
 
     environment_variable {
       "name" = "IMAGE_REPO_NAME"
-      "value" = "${var.org_name}"
+      "value" = "${var.project_name}"
     }
 
     environment_variable {
