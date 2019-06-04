@@ -11,7 +11,7 @@ ENV DRUSH_VERSION 8.2.3
 # ENV MYSQL_PORT
 # ENV DRUPAL_HASH_SALT
 
-ADD Makefile Makefile
-ADD docker/civicrm-drupal /var/www/html/sites/default
+COPY Makefile Makefile
+COPY docker/civicrm-drupal /
 
 RUN make
