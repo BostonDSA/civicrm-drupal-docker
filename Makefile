@@ -23,6 +23,9 @@ build:
 	curl -O -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar
 	chmod +x drush.phar
 	mv drush.phar /usr/local/bin/drush
+# Install SMTP
+	drush pm-download https://ftp.drupal.org/files/projects/smtp-7.x-1.7.tar.gz
+	drush pm-enable smtp
 
 # Creates the database tables for Drupal + CiviCRM
 seed-db:
