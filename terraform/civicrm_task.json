@@ -17,7 +17,7 @@
 	"mountPoints": [
 	    {
 		"sourceVolume": "letsencrypt",
-		"containerPath": "/etc/letsencrypt/live"
+		"containerPath": "/etc/letsencrypt/local"
 	    }
 	],
 	"environment": [
