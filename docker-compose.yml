@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "8080:80"
+      - "4433:443"
     depends_on:
       - db
     environment:

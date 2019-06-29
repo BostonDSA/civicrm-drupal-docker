@@ -40,6 +40,11 @@ resource "aws_ecs_task_definition" "civicrm" {
   family = "${var.project_name}"
   requires_compatibilities = ["EC2"]
   container_definitions = "${data.template_file.container_definitions.rendered}"
+
+  volume {
+    name      = "letsencrypt"
+    host_path = "/etc/letsencrypt/local"
+  }
 }
 
 data "aws_ami" "amazon-linux-ecs" {

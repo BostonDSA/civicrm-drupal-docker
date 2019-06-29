@@ -5,6 +5,9 @@ build:
 	apt install -y mysql-client # drush needs this
 	apt install -y certbot python-certbot-apache -t stretch-backports # letsencrypt
 
+# Add Apache modules
+	a2enmod ssl && service apache2 restart
+
 # Install CiviCRM
 	curl -O -L https://download.civicrm.org/civicrm-${CIVICRM_VERSION}-drupal.tar.gz
 	tar xzf civicrm-${CIVICRM_VERSION}-drupal.tar.gz
