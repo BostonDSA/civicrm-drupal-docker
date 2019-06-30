@@ -33,6 +33,7 @@ data "template_file" "container_definitions" {
     mysql_host = "${aws_db_instance.shared.address}"
     # TODO move this out of env vars
     drupal_hash_salt = "${var.drupal_hash_salt}"
+    base_url = "${var.base_url}"
   }
 }
 

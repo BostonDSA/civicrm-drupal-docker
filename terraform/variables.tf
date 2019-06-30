@@ -23,3 +23,7 @@ variable aws_account_id {}
 variable aws_rds_root_password {}
 
 variable drupal_hash_salt {}
+
+variable base_url {
+  default = "http://localhost:8080"
+}

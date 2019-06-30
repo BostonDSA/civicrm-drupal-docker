@@ -312,7 +312,8 @@ $drupal_hash_salt = getenv('DRUPAL_HASH_SALT');
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
-# $base_url = 'http://www.example.com';  // NO trailing slash!
+
+$base_url = getenv('BASEURL');
 
 /**
  * PHP settings:

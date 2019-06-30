@@ -44,6 +44,10 @@
 	    {
 		"name": "DRUPAL_HASH_SALT",
 		"value": "${drupal_hash_salt}"
+	    },
+	    {
+		"name": "BASEURL",
+		"value": "${base_url}"
 	    }
 	]
     }
