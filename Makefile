@@ -22,10 +22,15 @@ build:
 	chown -R www-data:www-data /var/www/html/sites/default
 	chmod g+s /var/www/html/sites/default/files/civicrm
 
-# Install drush
+# Install drush (Drupal CLI)
 	curl -O -L https://github.com/drush-ops/drush/releases/download/${DRUSH_VERSION}/drush.phar
 	chmod +x drush.phar
 	mv drush.phar /usr/local/bin/drush
+
+# Install cv (CiviCRM CLI)
+	curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
+	chmod +x /usr/local/bin/cv
+
 # Install SMTP
 	drush pm-download smtp-7.x-1.7
 
