@@ -3,7 +3,6 @@ build:
 # Install some packages
 	apt update
 	apt install -y mysql-client # drush needs this
-	apt install -y certbot python-certbot-apache -t stretch-backports # letsencrypt
 
 # Add Apache modules
 	a2enmod ssl && service apache2 restart
