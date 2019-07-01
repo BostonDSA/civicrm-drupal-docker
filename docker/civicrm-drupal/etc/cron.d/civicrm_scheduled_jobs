@@ -1,0 +1,4 @@
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+*/5 * * * * cv api job.execute --user=skierx --cwd=/var/www/html --out=json-strict > /var/log/civicrm_scheduled_jobs && chown -R www-data:www-data /var/www/html/sites/default/files
