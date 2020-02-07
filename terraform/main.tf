@@ -65,7 +65,8 @@ data "aws_ami" "amazon-linux-ecs" {
 }
 
 resource "aws_instance" "web" {
-  ami           = "${data.aws_ami.amazon-linux-ecs.id}"
+  #"${data.aws_ami.amazon-linux-ecs.id}"
+  ami           = "ami-00cf4737e238866a3"
   instance_type = "t3.micro"
   iam_instance_profile = "${aws_iam_instance_profile.ec2.name}"
   subnet_id = "${aws_default_subnet.default.id}"
